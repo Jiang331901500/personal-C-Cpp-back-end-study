@@ -17,6 +17,12 @@ int work_add2(int& a, int& b)
     return a + b;
 }
 
+int work_add3(int a, int b)
+{
+    sleep_for(sec(2));
+    return a + b;
+}
+
 void do_something()
 {
     sleep_for(sec(2));
@@ -31,7 +37,8 @@ int main()
 
     int a = 2;
     int b = 3;
-    future<decltype(work_add2(a ,b))> result2 = async(launch::deferred, work_add2, ref(a), ref(b));
+    //future<decltype(work_add2(a ,b))> result2 = async(launch::deferred, work_add2, ref(a), ref(b));
+    future<int> result2 = async(launch::deferred, work_add3, 2, 3);
     do_something();
     result2.wait();
     cout << "result2 wait over\n";  // 
